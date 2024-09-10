@@ -42,9 +42,31 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    let code;
+    function generatorNumber(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+    code = generatorNumber(0, this.state.list.length * 30);
+    this.state.list.map(item => {
+      if (code === item.code) code = generatorNumber(0, this.state.list.length * 30);
+    });
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }],
+      list: [...this.state.list, { code: code, title: 'Новая запись', selectCount: 0 }],
+    });
+  }
+  /**
+   * Добавление количество совершенных выделений
+   */
+  selectItemCount(code) {
+    this.setState({
+      ...this.state,
+      list: this.state.list.map(item => {
+        if (code === item.code && item.selected) {
+          item.selectCount += 1;
+        }
+        return item;
+      }),
     });
   }
 
@@ -69,6 +91,8 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+        } else {
+          item.selected = false;
         }
         return item;
       }),
