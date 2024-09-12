@@ -33,7 +33,7 @@ function App({ store }) {
                 <div className="Item-title">
                   {item.title}
                   {item.selectCount !== 0 ? (
-                    <span className="Item-code">Выделяли: {item.selectCount} раз</span>
+                    <span className="Item-code">| Выделяли {item.selectCount} раз</span>
                   ) : (
                     ''
                   )}

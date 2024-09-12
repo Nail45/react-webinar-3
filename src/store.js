@@ -42,14 +42,9 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
-    let code;
-    function generatorNumber(min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
-    }
-    code = generatorNumber(0, this.state.list.length * 30);
-    this.state.list.map(item => {
-      if (code === item.code) code = generatorNumber(0, this.state.list.length * 30);
-    });
+    const code =
+      (this.state.list.length > 0 ? this.state.list[this.state.list.length - 1].code : 0) + 1;
+
     this.setState({
       ...this.state,
       list: [...this.state.list, { code: code, title: 'Новая запись', selectCount: 0 }],
