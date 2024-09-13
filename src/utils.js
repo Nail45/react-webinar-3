@@ -26,3 +26,11 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export function selectCountText(click) {
+  let a = click.toString().split('');
+  if (click === 12 || click === 13 || click === 14) return `Выделяли ${click} раз`;
+  if (a[a.length - 1] === '2' || a[a.length - 1] === '3' || a[a.length - 1] === '4')
+    return `Выделяли ${click} раза`;
+  else return `Выделяли ${click} раз`;
+}
